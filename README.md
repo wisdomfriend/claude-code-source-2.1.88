@@ -41,3 +41,40 @@ See our [data usage policies](https://code.claude.com/docs/en/data-usage).
 We have implemented several safeguards to protect your data, including limited retention periods for sensitive information and restricted access to user session data.
 
 For full details, please review our [Commercial Terms of Service](https://www.anthropic.com/legal/commercial-terms) and [Privacy Policy](https://www.anthropic.com/legal/privacy).
+
+
+
+# 调试代码
+
+```python
+$env:PYTHONUTF8 = "1"
+$env:PYTHONIOENCODING = "utf-8"
+$env:CONDA_NO_PLUGINS = "true"
+conda activate cherry-studio
+
+node --version
+cd "D:\个人\文档\obsidian\python\claude\claude-code-source"
+node .\cli.js --version
+node .\cli.js
+
+
+改的是 docker-compose.yml 里的环境变量/挂载/命令等：
+不需要“编译镜像”，但需要重建容器生效：
+docker compose up -d
+（通常会自动重建相关容器）
+
+改的是 Dockerfile 或镜像构建相关内容：
+需要重新构建镜像：
+docker compose up -d --build
+
+想强制确保一定重建容器（即使 Compose 没检测到变化）：
+docker compose up -d --force-recreate
+
+官方 Claude Code:
+docker compose exec official-claude claude
+
+你自己的 cli.js：
+docker compose exec custom-claude node /workspace/cli.js
+
+```
+
