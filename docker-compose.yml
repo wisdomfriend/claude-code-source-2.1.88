@@ -1,0 +1,44 @@
+services:
+  official-claude:
+    build:
+      context: .
+      dockerfile: Dockerfile.official
+    image: claude-official:local
+    container_name: official-claude
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
+    environment:
+      - ANTHROPIC_BASE_URL=${ANTHROPIC_BASE_URL:-https://api.deepseek.com/anthropic}
+      - ANTHROPIC_AUTH_TOKEN=${ANTHROPIC_AUTH_TOKEN:-}
+      - ANTHROPIC_MODEL=${ANTHROPIC_MODEL:-deepseek-chat}
+      - ANTHROPIC_SMALL_FAST_MODEL=${ANTHROPIC_SMALL_FAST_MODEL:-deepseek-chat}
+      - TZ=${TZ:-Asia/Shanghai}
+    volumes:
+      - ./:/workspace
+      - official_claude_home:/root/.claude
+    command: ["bash", "-lc", "sleep infinity"]
+
+  custom-claude:
+    build:
+      context: .
+      dockerfile: Dockerfile.custom
+    image: claude-custom:local
+    container_name: custom-claude
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
+    environment:
+      - ANTHROPIC_BASE_URL=${ANTHROPIC_BASE_URL:-https://api.deepseek.com/anthropic}
+      - ANTHROPIC_AUTH_TOKEN=${ANTHROPIC_AUTH_TOKEN:-}
+      - ANTHROPIC_MODEL=${ANTHROPIC_MODEL:-deepseek-chat}
+      - ANTHROPIC_SMALL_FAST_MODEL=${ANTHROPIC_SMALL_FAST_MODEL:-deepseek-chat}
+      - TZ=${TZ:-Asia/Shanghai}
+    volumes:
+      - ./:/workspace
+      - custom_claude_home:/root/.claude
+    command: ["bash", "-lc", "sleep infinity"]
+
+volumes:
+  official_claude_home:
+  custom_claude_home:

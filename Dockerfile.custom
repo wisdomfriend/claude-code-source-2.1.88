@@ -1,0 +1,6 @@
+FROM node:20-bookworm
+
+WORKDIR /workspace
+
+# Keep container alive; run custom CLI via `docker compose exec`.
+CMD ["bash", "-lc", "sleep infinity"]
