@@ -76,5 +76,9 @@ docker compose exec official-claude claude
 你自己的 cli.js：
 docker compose exec custom-claude node /workspace/cli.js
 
+参考博文:
+https://zhuanlan.zhihu.com/p/2004933500453818798
+
 ```
 
+![image-20260408053503972](C:\Users\62792\AppData\Roaming\Typora\typora-user-images\image-20260408053503972.png)
